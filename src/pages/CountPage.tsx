@@ -6,14 +6,8 @@ type CountPageProps ={
     database:DatabaseT
 }
 const CountPage = ({database}:CountPageProps) => {
-    const getRoomData = async() => {
-        database.getRoomInfo("user1", "counter_room1", (data:any)=>console.log(data))
-    }
-    useEffect(()=>{
-        getRoomData()
-    },[])
     return (
-        <CountContainer/>
+        <CountContainer database={database}/>
     )
 }
 
