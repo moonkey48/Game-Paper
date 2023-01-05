@@ -1,0 +1,24 @@
+.counterList{
+    width: 100%;
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+.counterItem{
+    list-style: none;
+}
+.userName{
+    text-align: center;
+}
+.countBox{
+    width: 150px;
+    height: 150px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
