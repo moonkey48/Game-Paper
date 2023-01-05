@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
+import { UserListT } from '../../types/user';
 import Counter from './Counter';
 
-export type User = {
-    name:string,
-    id:string,
-    count:number
-}
-export type UserList = {
-    [key:string]: User
-}
-const usersDefault: UserList = {
+const usersDefault: UserListT = {
     "austin_1": {   
         name: "austin",
         id:"austin_1",
@@ -23,17 +16,23 @@ const usersDefault: UserList = {
 }
 
 const CountContainer = () => {
-    const [users,setUsers] = useState<UserList>(usersDefault)
+    const [users,setUsers] = useState<UserListT>(usersDefault)
     const onPlus = (id: string) =>{
         const updated = {...users};
         updated[id].count = updated[id].count + 1;
+        setUsers(updated)
+    }
+    const onMinus = (id:string) => {
+        const updated = {...users};
+        updated[id].count = updated[id].count - 1;
         setUsers(updated)
     }
     return (
         <>
             <Counter 
             users={users} 
-            handleAdd={onPlus}
+            handlePlus={onPlus}
+            handleMinus={onMinus}
             />
         </>
     )

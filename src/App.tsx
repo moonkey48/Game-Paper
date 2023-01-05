@@ -1,9 +1,12 @@
+import { Link } from 'react-router-dom';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>hi</h1>
+      <Link to='/count'>
+        <h1>count</h1>
+      </Link>
     </div>
   );
 }
