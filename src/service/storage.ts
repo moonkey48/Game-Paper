@@ -1,6 +1,5 @@
-import { DatabaseT } from './../types/user';
-
 import {getDatabase, onValue, ref, set } from 'firebase/database';
+import { DatabaseT } from '../types/database';
 import { UserT } from '../types/user';
 
 class Database implements DatabaseT {

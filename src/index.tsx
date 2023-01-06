@@ -7,8 +7,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CountPage from './pages/CountPage';
 import Database from './service/storage';
 import app from './service/config';
+import Auth from './service/auth';
+import LoginContainer from './components/login/LoginContainer';
 
 const database = new Database(app);
+const auth = new Auth(app);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,6 +21,7 @@ root.render(
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<App/>} />
+      <Route path='/login' element={<LoginContainer auth={auth}/>} />
       <Route path='/count' element={<CountPage database={database} />} />
     </Routes>
     </BrowserRouter>

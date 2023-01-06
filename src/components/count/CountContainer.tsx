@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { DatabaseT, UserListT, UserT } from '../../types/user';
+import { DatabaseT } from '../../types/database';
+import { UserListT, UserT } from '../../types/user';
 import Loading from '../loading/Loading';
 import Counter from './Counter';
 

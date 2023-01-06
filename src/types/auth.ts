@@ -1,3 +1,5 @@
+import { UserBasicT } from './user';
+
 export type AuthT = {
-    signInWithGoogle: () => void;
+    signInWithGoogle: (callback:(userInfo:UserBasicT)=>void) => void;
 }

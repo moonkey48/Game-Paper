@@ -1,3 +1,8 @@
+export type UserBasicT = {
+    displayName:string
+    email: string;
+    uid:string
+}
 export type UserT = {
     name:string,
     id:string,

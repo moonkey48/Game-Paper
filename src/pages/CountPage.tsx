@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import CountContainer from '../components/count/CountContainer';
-import { DatabaseT } from '../types/user';
+import { DatabaseT } from '../types/database';
+
 
 type CountPageProps ={
     database:DatabaseT
