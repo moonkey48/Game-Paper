@@ -1,1 +1,1 @@
-# 보드게임할 때 노트가 없다
+# note for all board games
