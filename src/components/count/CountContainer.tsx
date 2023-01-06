@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { DatabaseT } from '../../types/database';
-import { UserListT, UserT } from '../../types/user';
+import { DatabaseT } from '../../types/databaseTypes';
+import { UserListT, UserT } from '../../types/userTypes';
 import Loading from '../loading/Loading';
 import Counter from './Counter';
 
@@ -14,7 +14,6 @@ const CountContainer = ({database}:CountContainerProps) => {
     const [users,setUsers] = useState<UserListT>({})
     const getRoomData = async() => {
         database.getRoomInfo("user1", "counter_room1", (data:any)=>{
-            console.log(data)
             setRoomId(data.id)
             setIsLoading(false)
             setUsers(data.userList)

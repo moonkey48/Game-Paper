@@ -1,4 +1,4 @@
-import { UserListT } from '../../types/user';
+import { UserListT } from '../../types/userTypes';
 import s from './Counter.module.css';
 
 type CounterProps = {

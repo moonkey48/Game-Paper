@@ -1,6 +1,6 @@
 import {getDatabase, onValue, ref, set } from 'firebase/database';
-import { DatabaseT } from '../types/database';
-import { UserT } from '../types/user';
+import { DatabaseT } from '../types/databaseTypes';
+import { UserBasicT, UserT } from '../types/userTypes';
 
 class Database implements DatabaseT {
   private db:any;
@@ -29,6 +29,18 @@ class Database implements DatabaseT {
     onValue(roomRef, (snapshot) => {
       const data = snapshot.val();
       callback(data)
+    });
+  }
+  setNewLoginUser(user:UserBasicT){
+    set(ref(this.db, `users/${user.uid}/displayname`), user.displayName);
+    set(ref(this.db, `users/${user.uid}/email`), user.email);
+    set(ref(this.db, `users/${user.uid}/uid`), user.uid);
+  }
+  getUserExist(uid:string, callback:(isExist:boolean)=>void){
+    const roomRef = ref(this.db, `/users/${uid}`);
+    onValue(roomRef, (snapshot) => {
+      const data = snapshot.val();
+      callback(data?true:false);
     });
   }
 }

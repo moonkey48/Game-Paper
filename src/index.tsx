@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CountPage from './pages/CountPage';
 import Database from './service/storage';
 import app from './service/config';
 import Auth from './service/auth';
-import LoginContainer from './components/login/LoginContainer';
+import { CookiesProvider } from 'react-cookie';
+import LoginPage from './pages/LoginPage';
+import MainPage from './pages/MainPage';
 
 const database = new Database(app);
 const auth = new Auth(app);
@@ -18,13 +19,16 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<App/>} />
-      <Route path='/login' element={<LoginContainer auth={auth}/>} />
-      <Route path='/count' element={<CountPage database={database} />} />
-    </Routes>
-    </BrowserRouter>
+    <CookiesProvider>
+      <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<LoginPage auth={auth} database={database} />} />
+        <Route path='/login' element={<LoginPage auth={auth} database={database} />} />
+        <Route path='/main' element={<MainPage auth={auth} database={database} />} />
+        <Route path='/count' element={<CountPage database={database} />} />
+      </Routes>
+      </BrowserRouter>
+    </CookiesProvider>
   </React.StrictMode>
 );
 

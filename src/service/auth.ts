@@ -1,5 +1,5 @@
-import { UserBasicT } from './../types/user';
-import {getAuth, GoogleAuthProvider, signInWithPopup, signOut} from 'firebase/auth';
+import { UserBasicT } from '../types/userTypes';
+import {getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut} from 'firebase/auth';
 
 export default class Auth {
     private auth:any;
@@ -16,7 +16,7 @@ export default class Auth {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 //const token = credential!.accessToken;
                 const user = result.user;
-
+                console.log(user)
                 callback({
                     displayName: user.displayName!,
                     email:user.email!,
@@ -27,6 +27,15 @@ export default class Auth {
                 console.log(`${errorMessage}`)
                 console.log('error on login')
             });
+    }
+    onAuthChange(callback:(isChanged:boolean)=>void){
+        onAuthStateChanged(this.auth, (user)=>{
+            if(user){
+                callback(false)
+            }else{
+                callback(true)
+            }
+        })
     }
     signOut(){
         signOut(this.auth).then(()=> console.log('logout success'))
