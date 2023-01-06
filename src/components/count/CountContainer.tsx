@@ -1,40 +1,54 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { DatabaseT, UserListT, UserT } from '../../types/user';
+import Loading from '../loading/Loading';
 import Counter from './Counter';
 
-export type User = {
-    name:string,
-    id:string,
-    count:number
-}
-export type UserList = {
-    [key:string]: User
-}
-const usersDefault: UserList = {
-    "austin_1": {   
-        name: "austin",
-        id:"austin_1",
-        count: 0
-    },
-    "lizzy_2": {   
-        name: "lizzy",
-        id:"lizzy_2",
-        count: 0
-    }
+type CountContainerProps = {
+    database:DatabaseT
 }
 
-const CountContainer = () => {
-    const [users,setUsers] = useState<UserList>(usersDefault)
+const CountContainer = ({database}:CountContainerProps) => {
+    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [roomId, setRoomId] = useState<string>('')
+    const [users,setUsers] = useState<UserListT>({})
+    const getRoomData = async() => {
+        database.getRoomInfo("user1", "counter_room1", (data:any)=>{
+            console.log(data)
+            setRoomId(data.id)
+            setIsLoading(false)
+            setUsers(data.userList)
+        })
+    }
+    useEffect(()=>{
+        getRoomData()
+    },[])
+
     const onPlus = (id: string) =>{
         const updated = {...users};
         updated[id].count = updated[id].count + 1;
         setUsers(updated)
+        changeDatabaseUser(id, updated[id])
+    }
+    const onMinus = (id:string) => {
+        const updated = {...users};
+        updated[id].count = updated[id].count - 1;
+        setUsers(updated)
+        changeDatabaseUser(id, updated[id])
+    }
+    const changeDatabaseUser = (userId:string, user:UserT) => {
+        database.setUser("user1", roomId, userId, user)
     }
     return (
         <>
-            <Counter 
+        {
+        isLoading ?
+        <Loading/> :
+        <Counter 
             users={users} 
-            handleAdd={onPlus}
-            />
+            handlePlus={onPlus}
+            handleMinus={onMinus}
+        /> 
+        }
         </>
     )
 }

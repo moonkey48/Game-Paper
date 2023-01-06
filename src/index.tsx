@@ -5,6 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CountPage from './pages/CountPage';
+import Database from './service/storage';
+import app from './service/config';
+
+const database = new Database(app);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,7 +18,7 @@ root.render(
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<App/>} />
-      <Route path='/count' element={<CountPage/>} />
+      <Route path='/count' element={<CountPage database={database} />} />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CountContainer from '../components/count/CountContainer';
+import { DatabaseT } from '../types/user';
 
-const CountPage = () => {
+type CountPageProps ={
+    database:DatabaseT
+}
+const CountPage = ({database}:CountPageProps) => {
     return (
-        <CountContainer/>
+        <CountContainer database={database}/>
     )
 }
 
