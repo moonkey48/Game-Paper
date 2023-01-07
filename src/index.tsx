@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -21,12 +21,12 @@ root.render(
   <React.StrictMode>
     <CookiesProvider>
       <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<LoginPage auth={auth} database={database} />} />
-        <Route path='/login' element={<LoginPage auth={auth} database={database} />} />
-        <Route path='/main' element={<MainPage auth={auth} database={database} />} />
-        <Route path='/count' element={<CountPage database={database} />} />
-      </Routes>
+        <Routes>
+          <Route path='/' element={<LoginPage auth={auth} database={database} />} />
+          <Route path='/login' element={<LoginPage auth={auth} database={database} />} />
+          <Route path='/main' element={<MainPage auth={auth} database={database} />} />
+          <Route path='/main/count' element={<CountPage auth={auth} database={database} />} />
+        </Routes>
       </BrowserRouter>
     </CookiesProvider>
   </React.StrictMode>

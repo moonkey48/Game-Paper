@@ -1,14 +1,48 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { useLocation } from 'react-router-dom';
 import CountContainer from '../components/count/CountContainer';
+import Loading from '../components/loading/Loading';
+import { AuthT } from '../types/authTypes';
 import { DatabaseT } from '../types/databaseTypes';
+import { RoomInfoT } from '../types/roomTypes';
+import { UserCountListT } from '../types/userTypes';
 
 
 type CountPageProps ={
-    database:DatabaseT
+    database:DatabaseT;
+    auth:AuthT
 }
-const CountPage = ({database}:CountPageProps) => {
+const CountPage = ({database, auth}:CountPageProps) => {
+    const location = useLocation()
+    const [cookies] = useCookies(['uid']);
+    const [roomInfo, setRoomInfo] = useState<RoomInfoT>();
+    const [pageState, setPageState] = useState<'loading' | 'error' | 'success'>('loading')
+    const getRoomInfo = () => {
+        database.getRoomInfo(cookies.uid, location.state.roomId, (data:any)=>setRoomInfo({
+            roomGameType:data.RoomGameType,
+            roomId:location.state.roomId,
+            roomName:data.roomName,
+            users:data.userList
+        }))
+    }
+    useEffect(()=>{
+        if(location.state.roomId){
+            getRoomInfo()
+        }
+    },[])
+    useEffect(()=>{
+        if(roomInfo){
+            setPageState('success')
+        }
+    },[roomInfo])
+
     return (
-        <CountContainer database={database}/>
+        <>
+        { pageState === 'loading' && <Loading/> }
+        { pageState === 'error' && <h1>error  when get info</h1> }
+        { pageState === 'success' && <CountContainer auth={auth} database={database} roomInfo={roomInfo}/>}
+        </>
     )
 }
 

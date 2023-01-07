@@ -1,8 +1,8 @@
-import { UserListT } from '../../types/userTypes';
+import { UserCountListT } from '../../types/userTypes';
 import s from './Counter.module.css';
 
 type CounterProps = {
-    users:UserListT;
+    users:UserCountListT;
     handlePlus: (id:string) => void
     handleMinus: (id:string) => void
 }
@@ -15,7 +15,7 @@ const Counter = ({users, handlePlus, handleMinus}:CounterProps) => {
                     <h3 className={s.userName}>{users[key].name}</h3>
                 <div 
                 className={s.countBox}>
-                    <h1>{users[key].count}</h1>
+                    <h1>{users[key].payload}</h1>
                 </div>
                 <div className={s.buttonBox}>
                     <button onClick={()=>handlePlus(key)}>+</button>
