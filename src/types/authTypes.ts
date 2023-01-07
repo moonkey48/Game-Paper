@@ -1,7 +1,7 @@
-import { UserBasicT } from './userTypes';
+import { OwnerT } from './userTypes';
 
 export type AuthT = {
-    signInWithGoogle: (callback:(userInfo:UserBasicT)=>void) => void;
+    signInWithGoogle: (callback:(userInfo:OwnerT)=>void) => void;
     signOut:()=>void;
     onAuthChange:(callback:(isChanged:boolean)=>void)=>void;
 }

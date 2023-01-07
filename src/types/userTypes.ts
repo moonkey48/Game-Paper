@@ -1,13 +1,14 @@
-export type UserBasicT = {
+export type OwnerT = {
     displayName:string
     email: string;
     uid:string
 }
-export type UserT = {
+export type UserT<T> = {
     name:string,
     id:string,
-    count:number
+    payload:T
 }
-export type UserListT = {
-    [key:string]: UserT
+export type UserCountListT = {
+    [key:string]: UserT<number>
 }
+

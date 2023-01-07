@@ -1,0 +1,1 @@
+export type roomType = 'count';

@@ -1,7 +1,7 @@
-import { UserBasicT, UserT } from './userTypes';
+import { OwnerT, UserT } from './userTypes';
 export type DatabaseT = {
-    setUser:(ownerId: string, roomId:string, userId:string, user:UserT)=>void
+    setUserCount:(ownerId: string, roomId:string, userId:string, user:UserT<number>)=>void
     getRoomInfo:(ownerId:string,roomId:string, callback:(data:any)=>void)=>void
-    setNewLoginUser:(user:UserBasicT)=>void;
+    setNewLoginUser:(user:OwnerT)=>void;
     getUserExist:(uid:string, callback:(isExist:boolean)=>void)=>void;
 }
