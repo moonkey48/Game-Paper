@@ -60,6 +60,7 @@ const CountContainer = ({database, auth, roomInfo}:CountContainerProps) => {
     }
     return (
         <>
+            <h1>{roomInfo?.roomName}</h1>
             <Counter 
                 users={users} 
                 handlePlus={onPlus}

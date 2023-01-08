@@ -34,3 +34,10 @@
     font-size: 30px;
     cursor: pointer;
 }
+
+.countMemberName{
+    border: none;
+}
+.countMemberName:focus{
+    outline: none;
+}

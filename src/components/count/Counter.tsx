@@ -1,5 +1,6 @@
 import { UserCountListT } from '../../types/userTypes';
 import s from './Counter.module.css';
+import CounterUserItem from './CounterUserItem';
 
 type CounterProps = {
     users:UserCountListT;
@@ -13,18 +14,15 @@ const Counter = ({users, handlePlus, handleMinus, handleChangeName, handleDelete
         <ul className={s.counterList}>
         {
             Object.keys(users).map(key=>{
-                return <li key={key} className={s.counterItem}>
-                    <h3 className={s.userName}>{users[key].name}</h3>
-                <div 
-                className={s.countBox}>
-                    <h1>{users[key].payload}</h1>
-                </div>
-                <div className={s.buttonBox}>
-                    <button onClick={()=>handlePlus(key)}>+</button>
-                    <button onClick={()=>handleMinus(key)}>-</button>
-                </div>
-                <button onClick={()=>handleDeleteUser(key)}>delete User</button>
-            </li>
+                return <CounterUserItem 
+                key={key} 
+                uid={key} 
+                user={users[key]} 
+                handlePlus={handlePlus}
+                handleMinus={handleMinus}
+                handleDeleteUser={handleDeleteUser}
+                handleChangeName={handleChangeName}
+                />
             }) 
         }
         </ul>
