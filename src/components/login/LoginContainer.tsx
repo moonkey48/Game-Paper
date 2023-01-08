@@ -18,6 +18,7 @@ const LoginContainer = ({auth,database}:LoginContainerProps) => {
     const handleSignIn = () => {
         auth.signInWithGoogle(checkUserInfo)
     }
+
     const checkUserInfo = (loginInfo: OwnerT) =>{
         if(loginInfo.uid){
             setUser(loginInfo)
@@ -52,6 +53,7 @@ const LoginContainer = ({auth,database}:LoginContainerProps) => {
             }
         })
     }
+    
     const setUserOnDB = (user:OwnerT) => {
         database.setNewLoginUser(user);
     }

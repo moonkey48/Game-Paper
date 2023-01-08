@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import CountContainer from '../components/count/CountContainer';
 import Loading from '../components/loading/Loading';
 import { AuthT } from '../types/authTypes';
@@ -15,19 +15,21 @@ type CountPageProps ={
 }
 const CountPage = ({database, auth}:CountPageProps) => {
     const location = useLocation()
+    const params = useParams()
     const [cookies] = useCookies(['uid']);
     const [roomInfo, setRoomInfo] = useState<RoomInfoT>();
     const [pageState, setPageState] = useState<'loading' | 'error' | 'success'>('loading')
     const getRoomInfo = () => {
-        database.getRoomInfo(cookies.uid, location.state.roomId, (data:any)=>setRoomInfo({
+        const roomId = params.roomId as string
+        database.getRoomInfo(cookies.uid, roomId, (data:any)=>setRoomInfo({
             roomGameType:data.RoomGameType,
-            roomId:location.state.roomId,
+            roomId:roomId,
             roomName:data.roomName,
             users:data.userList
         }))
     }
     useEffect(()=>{
-        if(location.state.roomId){
+        if(params){
             getRoomInfo()
         }
     },[])

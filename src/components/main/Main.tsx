@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthT } from '../../types/authTypes';
 import { DatabaseT } from '../../types/databaseTypes';
-import { RoomGameType } from '../../types/roomTypes';
+import { RoomGameType, RoomInfoT } from '../../types/roomTypes';
 import { UserCountListT, UserT } from '../../types/userTypes';
 import Modal from '../modal/Modal';
 
@@ -17,7 +17,7 @@ const Main = ({auth,database}:MainProps) => {
     const navigate = useNavigate();
     const [newCountPage, setNewCountPage] = useState<boolean>(false);
     const [cookies,setCookie,removeCookie] = useCookies(['uid']);
-    const [rooms, setRooms] = useState();
+    const [roomsIn, setRoomsIn] = useState<{[key:string]:RoomInfoT}>();
 
     const handleLogout = () => {
         auth.signOut();
@@ -43,7 +43,7 @@ const Main = ({auth,database}:MainProps) => {
     }
 
     const handleRedirectToRoom = (roomId:string) => {
-        navigate('/main/count', {
+        navigate(`/main/count/${roomId}`, {
             state:{
                 roomId
             }
@@ -54,7 +54,7 @@ const Main = ({auth,database}:MainProps) => {
             if(data === false || data === true){
                 console.log('no rooms')
             }else{
-                console.log(data.rooms)
+                setRoomsIn(data.rooms);
             }
         })
     }
@@ -74,6 +74,19 @@ const Main = ({auth,database}:MainProps) => {
         <div>
             <button onClick={handleLogout}>logout</button>
             <h1>main page</h1>
+            {
+                roomsIn && 
+                <ul>
+                {
+                    Object.keys(roomsIn).map(roomId=>{
+                        return <li key={roomId} onClick={()=>handleRedirectToRoom(roomId)}>
+                            <h3>{roomsIn[roomId].roomName}</h3>
+                            <h4>{roomsIn[roomId].roomGameType}</h4>
+                        </li>
+                    })
+                }
+                </ul>
+            }
             <button onClick={()=>setNewCountPage(true)}>Count</button>
             {
             newCountPage && <Modal 

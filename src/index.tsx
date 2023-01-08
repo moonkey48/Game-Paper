@@ -25,7 +25,7 @@ root.render(
           <Route path='/' element={<LoginPage auth={auth} database={database} />} />
           <Route path='/login' element={<LoginPage auth={auth} database={database} />} />
           <Route path='/main' element={<MainPage auth={auth} database={database} />} />
-          <Route path='/main/count' element={<CountPage auth={auth} database={database} />} />
+          <Route path='/main/count/:roomId' element={<CountPage auth={auth} database={database} />} />
         </Routes>
       </BrowserRouter>
     </CookiesProvider>
