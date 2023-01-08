@@ -62,7 +62,7 @@ const Main = ({auth,database}:MainProps) => {
     }
     useEffect(()=>{
         getUserInfo();
-    },[getUserInfo])
+    },[])
     useEffect(()=>{
         auth.onAuthChange((isChanged:boolean)=>{
             if(isChanged!){
@@ -70,7 +70,7 @@ const Main = ({auth,database}:MainProps) => {
                 removeCookie('uid')
             }
         })
-    },[auth, navigate, removeCookie])
+    },[auth])
 
     return (
         <div className={s.mainContainer}>

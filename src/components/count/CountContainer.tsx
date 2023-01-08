@@ -24,7 +24,7 @@ const CountContainer = ({database, auth, roomInfo, changeRoomName, deleteRoom}:C
             setRoomId(roomInfo.roomId)
             setUsers(roomInfo.users);
         }
-    },[roomInfo])
+    },[])
 
     const onPlus = (memberId: string) =>{
         const updated = {...users};

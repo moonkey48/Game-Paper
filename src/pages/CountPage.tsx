@@ -54,7 +54,7 @@ const CountPage = ({database, auth}:CountPageProps) => {
         if(params){
             getRoomInfo()
         }
-    },[params, getRoomInfo])
+    },[params])
     useEffect(()=>{
         if(roomInfo){
             setPageState('success')
