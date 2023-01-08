@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation } from 'react-router-dom';
 import { AuthT } from '../../types/authTypes';
 import { DatabaseT } from '../../types/databaseTypes';
 import { RoomInfoT } from '../../types/roomTypes';
-import { MemberT, UserCountListT, UserT } from '../../types/userTypes';
-import Loading from '../loading/Loading';
+import { MemberT, UserCountListT } from '../../types/userTypes';
 import Counter from './Counter';
 
 type CountContainerProps = {
     roomInfo:RoomInfoT | undefined;
     database:DatabaseT;
-    auth:AuthT
+    auth:AuthT;
+    changeRoomName:(newRoomName:string)=>void;
+    deleteRoom:()=>void
 }
 
-const CountContainer = ({database, auth, roomInfo}:CountContainerProps) => {
+const CountContainer = ({database, auth, roomInfo, changeRoomName, deleteRoom}:CountContainerProps) => {
     const [cookies] = useCookies(['uid'])
-
     const [roomId, setRoomId] = useState<string>('')
     const [users,setUsers] = useState<UserCountListT>({})
 
@@ -25,7 +24,7 @@ const CountContainer = ({database, auth, roomInfo}:CountContainerProps) => {
             setRoomId(roomInfo.roomId)
             setUsers(roomInfo.users);
         }
-    },[])
+    },[roomInfo])
 
     const onPlus = (memberId: string) =>{
         const updated = {...users};
@@ -55,6 +54,7 @@ const CountContainer = ({database, auth, roomInfo}:CountContainerProps) => {
         setUsers(updated)
         changeDatabaseUser(memberId, null)
     } 
+
     const onAddUser = () => {
         let updated = {...users}
         const newUserId = `${Date.now()}_${Math.round(Math.random()*100)}`;
@@ -70,17 +70,17 @@ const CountContainer = ({database, auth, roomInfo}:CountContainerProps) => {
         database.setUserCount(cookies.uid, roomId, userId, user)
     }
     return (
-        <>
-            <h1>{roomInfo?.roomName}</h1>
             <Counter 
+                roomInfo={roomInfo}
                 users={users} 
                 handlePlus={onPlus}
                 handleMinus={onMinus}
                 handleDeleteUser={onDeleteUser}
                 handleChangeName={onChangeName}
-            /> 
-            <button onClick={onAddUser}>add new user</button>
-        </>
+                handleAddUser={onAddUser}
+                changeRoomName={changeRoomName}
+                deleteRoom={deleteRoom}
+            />  
     )
 }
 

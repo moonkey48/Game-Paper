@@ -21,7 +21,6 @@ class Database implements DatabaseT {
   }
 
   /**
-   * 이후 createOrUpdateRoom으로 변경 필요
    * @param ownerId 
    * @param roomId 
    * @param users 
@@ -36,6 +35,12 @@ class Database implements DatabaseT {
       set(ref(this.db, `users/${ownerId}/rooms/${roomId}/userList/${key}`), users[key]);
     })
     callback();
+  }
+  changeRoomName(ownerId:string, roomId:string, newRoomName:string){
+    set(ref(this.db, `users/${ownerId}/rooms/${roomId}/roomName`), newRoomName);
+  }
+  deleteRoomDB(ownerId: string, roomId: string){
+    set(ref(this.db, `users/${ownerId}/rooms/${roomId}`), null);
   }
 
   /**

@@ -1,0 +1,61 @@
+.counterItem{
+    list-style: none;
+    width: 180px;
+    height: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px;
+    position: relative;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.counterItem:not(:last-child){
+    margin-right: 10px;
+}
+.countMemberName{
+    border: none;
+    background: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+.countMemberName:focus{
+    outline: none;
+}
+.countBox{
+    width: 100%;
+    background:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 0px;
+}
+.countValue{
+    font-size: 40px;
+}
+.buttonBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.buttonBox button{
+    width:50px;
+    height: 20px;
+    background: none;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.deleteBtn{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background: none;
+    border: none;
+    color: lightgrey;
+    cursor: pointer;
+    transition: 0.3s color;
+}
+.deleteBtn:hover{
+    color:red
+}

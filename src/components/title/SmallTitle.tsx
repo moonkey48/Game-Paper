@@ -6,8 +6,8 @@ type TitleProps = {
     message: string;
     align?: Align
 }
-const LargeTitle = ({message, align = 'left'}:TitleProps) => {
-    return <h2 className={`${s.large} ${s[align]}`}>{message}</h2>
+const SmallTitle = ({message, align = 'left'}:TitleProps) => {
+    return <h5 className={`${s.small} ${s[align]}`}>{message}</h5>
 }
 
-export default LargeTitle;
+export default SmallTitle;

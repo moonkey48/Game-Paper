@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { MemberT } from '../../types/userTypes';
-import s from './Counter.module.css';
+import s from './CounterUser.module.css';
 
 type CounterUserItemProps = {
     uid:string;
@@ -21,13 +21,13 @@ const CounterUserItem = ({uid, user, handlePlus, handleMinus, handleDeleteUser, 
                 <input className={s.countMemberName} type="text" value={memberName} onChange={onChangeNameInput} />
             <div 
             className={s.countBox}>
-                <h1>{user.payload}</h1>
+                <h1 className={s.countValue}>{user.payload}</h1>
             </div>
             <div className={s.buttonBox}>
-                <button onClick={()=>handlePlus(uid)}>+</button>
-                <button onClick={()=>handleMinus(uid)}>-</button>
+                <button className={s.countBtn} onClick={()=>handlePlus(uid)}>+</button>
+                <button className={s.countBtn} onClick={()=>handleMinus(uid)}>-</button>
             </div>
-            <button onClick={()=>handleDeleteUser(uid)}>delete User</button>
+            <button className={s.deleteBtn} onClick={()=>handleDeleteUser(uid)}>delete</button>
         </li>
     )
 }

@@ -61,7 +61,7 @@ const LoginContainer = ({auth,database}:LoginContainerProps) => {
         if(cookie.uid){
             handleRedirect(cookie.uid)
         }
-    },[])
+    },[cookie.uid, handleRedirect])
     
     return (
         <div>

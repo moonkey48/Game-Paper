@@ -5,5 +5,7 @@ export type DatabaseT = {
     getRoomInfo:(ownerId:string,roomId:string, callback:(data:any)=>void)=>void
     setNewLoginUser:(user:OwnerT)=>void;
     getOwnerInfo:(uid:string, callback:(data:UserT | boolean)=>void)=>void;
-    createRoom:(ownerId:string,roomId:string, users:UserCountListT,roomType:RoomGameType, callback:()=>void, roomName?:string)=>void
+    createRoom:(ownerId:string,roomId:string, users:UserCountListT,roomType:RoomGameType, callback:()=>void, roomName?:string)=>void;
+    changeRoomName:(ownerId:string, roomId:string, newRoomName:string)=>void
+    deleteRoomDB:(ownerId:string, roomId:string)=>void
 }

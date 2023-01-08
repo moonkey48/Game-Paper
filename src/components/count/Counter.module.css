@@ -1,3 +1,9 @@
+
+.container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 .counterList{
     width: 100%;
     margin-top: 100px;
@@ -6,38 +12,33 @@
     justify-content: center;
     flex-flow: row wrap;
 }
-.counterItem{
-    list-style: none;
-}
-.userName{
-    text-align: center;
-}
-.countBox{
-    width: 150px;
-    margin: 30px 30px 10px;
-    background-color: white;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.buttonBox{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.buttonBox button{
-    width:50px;
-    height: 20px;
+
+.button{
+    padding: 10px;
+    cursor: pointer;
+    width: 100px;
     background: none;
     border: none;
-    font-size: 30px;
-    cursor: pointer;
+    margin-top: 10px;
+    font-weight: 700;
+    color: rgb(129, 109, 244);
+    transition: 0.3s;
+}
+.button:hover{
+    background: rgb(129, 109, 244);
+    color: white;
 }
 
-.countMemberName{
-    border: none;
+.editBox{
+    margin-top: 150px;
 }
-.countMemberName:focus{
+.roomName{
+    text-align: center;
+    border: none;
+    background: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+.roomName:focus{
     outline: none;
 }

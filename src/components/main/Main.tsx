@@ -21,7 +21,7 @@ type MainProps = {
 const Main = ({auth,database}:MainProps) => {
     const navigate = useNavigate();
     const [newCountPage, setNewCountPage] = useState<boolean>(false);
-    const [cookies,setCookie,removeCookie] = useCookies(['uid']);
+    const [cookies, ,removeCookie] = useCookies(['uid']);
     const [roomsIn, setRoomsIn] = useState<{[key:string]:RoomInfoT}>();
 
     const handleMakeNewRoom = (roomType:RoomGameType, roomMember: number) =>{
@@ -62,7 +62,7 @@ const Main = ({auth,database}:MainProps) => {
     }
     useEffect(()=>{
         getUserInfo();
-    },[])
+    },[getUserInfo])
     useEffect(()=>{
         auth.onAuthChange((isChanged:boolean)=>{
             if(isChanged!){
@@ -70,7 +70,7 @@ const Main = ({auth,database}:MainProps) => {
                 removeCookie('uid')
             }
         })
-    },[auth])
+    },[auth, navigate, removeCookie])
 
     return (
         <div className={s.mainContainer}>
@@ -78,7 +78,7 @@ const Main = ({auth,database}:MainProps) => {
                 roomsIn && 
                 <section className={s.mainSection}>
                 <LargeTitle message='기존 방' align='center'/>
-                <RowListContainer>
+                <ColListContainer>
                 {
                     Object.keys(roomsIn).map(roomId=>{
                         return <BoxMainRooms
@@ -89,7 +89,7 @@ const Main = ({auth,database}:MainProps) => {
                         />
                     })
                 }
-                </RowListContainer>
+                </ColListContainer>
                 </section>
             }
 
