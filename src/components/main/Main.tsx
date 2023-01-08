@@ -13,7 +13,6 @@ type MainProps = {
 }
 
 const Main = ({auth,database}:MainProps) => {
-    const location = useLocation();
     const navigate = useNavigate();
     const [newCountPage, setNewCountPage] = useState<boolean>(false);
     const [cookies,setCookie,removeCookie] = useCookies(['uid']);
@@ -50,7 +49,7 @@ const Main = ({auth,database}:MainProps) => {
         })
     }
     const getUserInfo = () => {
-        database.getOwnerInfo(location.state.uid, (data: UserT  | boolean )=>{
+        database.getOwnerInfo(cookies.uid, (data: UserT  | boolean )=>{
             if(data === false || data === true){
                 console.log('no rooms')
             }else{

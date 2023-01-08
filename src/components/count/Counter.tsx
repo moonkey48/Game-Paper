@@ -4,8 +4,8 @@ import CounterUserItem from './CounterUserItem';
 
 type CounterProps = {
     users:UserCountListT;
-    handlePlus: (id:string) => void
-    handleMinus: (id:string) => void
+    handlePlus: (memberId:string) => void
+    handleMinus: (memberId:string) => void
     handleChangeName: (memberId: string, changedName: string) => void;
     handleDeleteUser: (memberId: string) => void;
 }

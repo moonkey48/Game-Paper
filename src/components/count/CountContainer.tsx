@@ -27,17 +27,17 @@ const CountContainer = ({database, auth, roomInfo}:CountContainerProps) => {
         }
     },[])
 
-    const onPlus = (id: string) =>{
+    const onPlus = (memberId: string) =>{
         const updated = {...users};
-        updated[id].payload = updated[id].payload + 1;
+        updated[memberId].payload = updated[memberId].payload + 1;
         setUsers(updated)
-        changeDatabaseUser(id, updated[id])
+        changeDatabaseUser(memberId, updated[memberId])
     }
-    const onMinus = (id:string) => {
+    const onMinus = (memberId:string) => {
         const updated = {...users};
-        updated[id].payload = updated[id].payload - 1;
+        updated[memberId].payload = updated[memberId].payload - 1;
         setUsers(updated)
-        changeDatabaseUser(id, updated[id])
+        changeDatabaseUser(memberId, updated[memberId])
     }
     const onChangeName = (memberId:string, changedName:string) => {
         const updated = {...users};
@@ -55,6 +55,17 @@ const CountContainer = ({database, auth, roomInfo}:CountContainerProps) => {
         setUsers(updated)
         changeDatabaseUser(memberId, null)
     } 
+    const onAddUser = () => {
+        let updated = {...users}
+        const newUserId = `${Date.now()}_${Math.round(Math.random()*100)}`;
+        updated[newUserId] = {
+            name:'user_name_default',
+            id:newUserId,
+            payload:0
+        }
+        setUsers(updated);
+        changeDatabaseUser(newUserId,  updated[newUserId])
+    }
     const changeDatabaseUser = (userId:string, user:MemberT<number> | null) => {
         database.setUserCount(cookies.uid, roomId, userId, user)
     }
@@ -68,6 +79,7 @@ const CountContainer = ({database, auth, roomInfo}:CountContainerProps) => {
                 handleDeleteUser={onDeleteUser}
                 handleChangeName={onChangeName}
             /> 
+            <button onClick={onAddUser}>add new user</button>
         </>
     )
 }
