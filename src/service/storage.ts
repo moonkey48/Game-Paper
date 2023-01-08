@@ -16,7 +16,7 @@ class Database implements DatabaseT {
    * @param userId 변경하길 원하는 정보가 포함된 사용자 ID
    * @param user 변경된 user 정보
    */
-  setUserCount(ownerId:string,roomId:string,userId:string, user:MemberT<number>) {
+  setUserCount(ownerId:string,roomId:string,userId:string, user:MemberT<number> | null) {
     set(ref(this.db, `users/${ownerId}/rooms/${roomId}/userList/${userId}`), user);
   }
 

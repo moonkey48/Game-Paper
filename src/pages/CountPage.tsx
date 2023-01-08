@@ -14,11 +14,13 @@ type CountPageProps ={
     auth:AuthT
 }
 const CountPage = ({database, auth}:CountPageProps) => {
-    const location = useLocation()
     const params = useParams()
     const [cookies] = useCookies(['uid']);
     const [roomInfo, setRoomInfo] = useState<RoomInfoT>();
     const [pageState, setPageState] = useState<'loading' | 'error' | 'success'>('loading')
+
+    //roomId를 더 복잡하게 만들 필요있음.
+
     const getRoomInfo = () => {
         const roomId = params.roomId as string
         database.getRoomInfo(cookies.uid, roomId, (data:any)=>setRoomInfo({

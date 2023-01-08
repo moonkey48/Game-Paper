@@ -5,8 +5,10 @@ type CounterProps = {
     users:UserCountListT;
     handlePlus: (id:string) => void
     handleMinus: (id:string) => void
+    handleChangeName: (memberId: string, changedName: string) => void;
+    handleDeleteUser: (memberId: string) => void;
 }
-const Counter = ({users, handlePlus, handleMinus}:CounterProps) => {
+const Counter = ({users, handlePlus, handleMinus, handleChangeName, handleDeleteUser}:CounterProps) => {
     return (
         <ul className={s.counterList}>
         {
@@ -21,6 +23,7 @@ const Counter = ({users, handlePlus, handleMinus}:CounterProps) => {
                     <button onClick={()=>handlePlus(key)}>+</button>
                     <button onClick={()=>handleMinus(key)}>-</button>
                 </div>
+                <button onClick={()=>handleDeleteUser(key)}>delete User</button>
             </li>
             }) 
         }

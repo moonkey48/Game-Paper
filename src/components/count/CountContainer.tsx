@@ -19,6 +19,7 @@ const CountContainer = ({database, auth, roomInfo}:CountContainerProps) => {
 
     const [roomId, setRoomId] = useState<string>('')
     const [users,setUsers] = useState<UserCountListT>({})
+
     useEffect(()=>{
         if(roomInfo !== undefined){
             setRoomId(roomInfo.roomId)
@@ -38,7 +39,23 @@ const CountContainer = ({database, auth, roomInfo}:CountContainerProps) => {
         setUsers(updated)
         changeDatabaseUser(id, updated[id])
     }
-    const changeDatabaseUser = (userId:string, user:MemberT<number>) => {
+    const onChangeName = (memberId:string, changedName:string) => {
+        const updated = {...users};
+        updated[memberId].name = changedName || 'default name';
+        setUsers(updated);
+        changeDatabaseUser(memberId, updated[memberId]);
+    }
+    const onDeleteUser = (memberId:string) => {
+        let updated: UserCountListT = {}
+        Object.keys(users).forEach(uid=>{
+            if(uid!==memberId){
+                updated[uid] = users[uid];
+            }
+        })
+        setUsers(updated)
+        changeDatabaseUser(memberId, null)
+    } 
+    const changeDatabaseUser = (userId:string, user:MemberT<number> | null) => {
         database.setUserCount(cookies.uid, roomId, userId, user)
     }
     return (
@@ -47,6 +64,8 @@ const CountContainer = ({database, auth, roomInfo}:CountContainerProps) => {
                 users={users} 
                 handlePlus={onPlus}
                 handleMinus={onMinus}
+                handleDeleteUser={onDeleteUser}
+                handleChangeName={onChangeName}
             /> 
         </>
     )

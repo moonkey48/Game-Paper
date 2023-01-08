@@ -1,7 +1,7 @@
 import { RoomGameType } from './roomTypes';
 import { MemberT, OwnerT, UserCountListT, UserT } from './userTypes';
 export type DatabaseT = {
-    setUserCount:(ownerId: string, roomId:string, userId:string, user:MemberT<number>)=>void
+    setUserCount:(ownerId: string, roomId:string, userId:string, user:MemberT<number> | null)=>void
     getRoomInfo:(ownerId:string,roomId:string, callback:(data:any)=>void)=>void
     setNewLoginUser:(user:OwnerT)=>void;
     getOwnerInfo:(uid:string, callback:(data:UserT | boolean)=>void)=>void;
