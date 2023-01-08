@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
+import s from './modal.module.css';
 
 type ModalProps = {
     message:string;
@@ -19,12 +20,16 @@ const Modal = ({message, callback,closeModal}:ModalProps) => {
         }
     }
      return (
-        <div>
-            <h3>{message}</h3>
-            <input type="number" value={roomMemberCount} onChange={(e:ChangeEvent<HTMLInputElement>)=>setRoomMemberCount(Number(e.target.value))} />
-            <button onClick={handleCancle}>취소</button>
-            <button onClick={handleSubmit}>완료</button>
-            <h3>{error}</h3>
+        <div className={s.container}>
+            <div className={s.modal}>
+                <h3 className={s.title}>{message}</h3>
+                <input  className={s.input} type="number" value={roomMemberCount} onChange={(e:ChangeEvent<HTMLInputElement>)=>setRoomMemberCount(Number(e.target.value))} />
+                <h5 className={s.error}>{error}</h5>
+                <div className={s.buttonBox}>
+                    <button className={`${s.cancelBtn} ${s.button}`} onClick={handleCancle}>취소</button>
+                    <button className={`${s.completeBtn} ${s.button}`} onClick={handleSubmit}>완료</button>
+                </div>
+            </div>
         </div>
     )
 }

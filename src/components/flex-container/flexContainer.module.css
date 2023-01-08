@@ -1,0 +1,14 @@
+.colList{
+    display: flex;
+    align-items: center;
+    flex-flow: column wrap;
+    margin: 10px 0;
+    max-width: 400px;
+}
+.rowList{
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    margin: 10px 0;
+    max-width: 400px;
+}

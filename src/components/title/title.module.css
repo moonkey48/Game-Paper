@@ -1,0 +1,13 @@
+.large{
+    font-size: 20px;
+    margin-top: 20px;
+}
+.left{
+    text-align: left;
+}
+.right{
+    text-align: right;
+}
+.center{
+    text-align: center;
+}

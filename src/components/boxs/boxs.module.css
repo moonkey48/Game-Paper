@@ -1,0 +1,29 @@
+.roomItem{
+    list-style: none;
+    width: 160px;
+    height: 70px;
+    background-color: rgb(129, 109, 244);
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.roomItem:hover{
+    transform: translateY(-5px);
+}
+
+.gameItem{
+    list-style: none;
+    width: 360px;
+    height: 40px;
+    background-color: rgb(129, 109, 244);
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}

@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthT } from '../../types/authTypes';
 import { DatabaseT } from '../../types/databaseTypes';
 import { RoomGameType, RoomInfoT } from '../../types/roomTypes';
 import { UserCountListT, UserT } from '../../types/userTypes';
+import BoxMainGames from '../boxs/BoxMainGames';
+import BoxMainRooms from '../boxs/boxMainRooms';
+import ColListContainer from '../flex-container/ColListContainer';
+import RowListContainer from '../flex-container/RowListContainer';
 import Modal from '../modal/Modal';
+import LargeTitle from '../title/LargeTitle';
+import s from './main.module.css';
 
 type MainProps = {
     auth:AuthT;
@@ -18,9 +24,6 @@ const Main = ({auth,database}:MainProps) => {
     const [cookies,setCookie,removeCookie] = useCookies(['uid']);
     const [roomsIn, setRoomsIn] = useState<{[key:string]:RoomInfoT}>();
 
-    const handleLogout = () => {
-        auth.signOut();
-    }
     const handleMakeNewRoom = (roomType:RoomGameType, roomMember: number) =>{
         if(roomType === 'count'){
             const roomId = `${Date.now()}`
@@ -70,23 +73,32 @@ const Main = ({auth,database}:MainProps) => {
     },[auth])
 
     return (
-        <div>
-            <button onClick={handleLogout}>logout</button>
-            <h1>main page</h1>
+        <div className={s.mainContainer}>
             {
                 roomsIn && 
-                <ul>
+                <section className={s.mainSection}>
+                <LargeTitle message='기존 방' align='center'/>
+                <RowListContainer>
                 {
                     Object.keys(roomsIn).map(roomId=>{
-                        return <li key={roomId} onClick={()=>handleRedirectToRoom(roomId)}>
-                            <h3>{roomsIn[roomId].roomName}</h3>
-                            <h4>{roomsIn[roomId].roomGameType}</h4>
-                        </li>
+                        return <BoxMainRooms
+                        key={roomId}
+                        roomId={roomId}
+                        room={roomsIn[roomId]}
+                        handleClick={handleRedirectToRoom}
+                        />
                     })
                 }
-                </ul>
+                </RowListContainer>
+                </section>
             }
-            <button onClick={()=>setNewCountPage(true)}>Count</button>
+
+            <LargeTitle message='새로운 방 만들기' align='center' />
+            <ColListContainer>
+                <BoxMainGames handleClick={()=>setNewCountPage(true)} />
+            </ColListContainer>
+
+
             {
             newCountPage && <Modal 
             message='방 인원수를 입력해주세요.'
