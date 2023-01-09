@@ -7,8 +7,8 @@ type BoxMainGamesProps = {
 const BoxMainGames = ({handleClick}:BoxMainGamesProps) => {
     return (
         <li className={s.gameItem} onClick={handleClick}>
-            <h3>Count Paper</h3>
-            <p>간단한 점수 Count를 도와줍니다.</p>
+            <h3 className={s.gameName}>Game Type : Count</h3>
+            <h4 className={s.gameDesc}>간단한 점수 Count를 도와드립니다.</h4>
         </li>
     )
 }

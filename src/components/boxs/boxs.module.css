@@ -15,6 +15,9 @@
 .roomItem:hover{
     transform: translateY(-5px);
 }
+.roomItem .roomType{
+    margin-top: 10px;
+}
 
 .gameItem{
     list-style: none;
@@ -33,4 +36,7 @@
 }
 .gameItem:hover{
     transform: translateY(-5px);
+}
+.gameItem .gameDesc{
+    margin-top: 10px;
 }

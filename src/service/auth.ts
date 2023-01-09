@@ -10,7 +10,7 @@ export default class Auth {
         this.provider = new GoogleAuthProvider();
     }
 
-    signInWithGoogle = async(callback:(loginInfo:OwnerT)=>void)=> {
+    signInWithGoogle = async(callback:(loginInfo:OwnerT)=>void, onError?:()=>void)=> {
         await signInWithPopup(this.auth, this.provider)
             .then((result) => {
                 //const token = credential!.accessToken;
@@ -24,7 +24,9 @@ export default class Auth {
             }).catch((error) => {
                 const errorMessage = error.message;
                 console.log(`${errorMessage}`)
-                console.log('error on login')
+                if(onError){
+                    onError();
+                }
             });
     }
     onAuthChange(callback:(isChanged:boolean)=>void){

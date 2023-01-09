@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthT } from '../../types/authTypes';
 import { DatabaseT } from '../../types/databaseTypes';
 import { OwnerT, UserT } from '../../types/userTypes';
+import s from './login.module.css';
 
 type LoginContainerProps = {
     auth:AuthT;
@@ -15,8 +16,12 @@ const LoginContainer = ({auth,database}:LoginContainerProps) => {
     const [error, setError] = useState<string>('');
     const navigate = useNavigate();
 
+    const handleError = () => {
+        setError('로그인 정보를 확인하는데 문제가 발생했습니다. 다른 아이디로 시도해주세요.')
+    }
+
     const handleSignIn = () => {
-        auth.signInWithGoogle(checkUserInfo)
+        auth.signInWithGoogle(checkUserInfo, handleError)
     }
 
     const checkUserInfo = (loginInfo: OwnerT) =>{
@@ -64,10 +69,11 @@ const LoginContainer = ({auth,database}:LoginContainerProps) => {
     },[cookie.uid, handleRedirect])
     
     return (
-        <div>
-            <h3>{error}</h3>
-            <button onClick={handleSignIn}>로그인</button>
-            {user && <h1>{user.displayName} is login</h1> }
+        <div className={s.container}>
+            <div className={s.main}></div>
+            <h5 className={s.error}>{error}</h5>
+            <p className={s.desc}>game paper을 통해 보드게임을 보다 편하게 즐기세요 🎲 <br />현재 구글계정을 통해서만 이용 가능합니다. </p>
+            <button className={s.googleLoginBtn}  onClick={handleSignIn}>Google</button>
         </div>
     )
 }
