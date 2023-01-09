@@ -24,8 +24,7 @@ const CounterUserItem = ({uid, user, handlePlus, handleMinus, handleDeleteUser, 
                 <h1 className={s.countValue}>{user.payload}</h1>
             </div>
             <div className={s.buttonBox}>
-                <button className={s.countBtn} onClick={(e:any)=>{
-                    e.preventDefault()
+                <button className={s.countBtn} onClick={()=>{
                     handlePlus(uid)
                 }}>+</button>
                 <button className={s.countBtn} onClick={()=>handleMinus(uid)}>-</button>

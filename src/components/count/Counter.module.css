@@ -38,6 +38,8 @@
     background: none;
     font-size: 14px;
     font-weight: bold;
+    width: 200px;
+    height: 40px;
 }
 .roomName:focus{
     outline: none;
