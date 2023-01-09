@@ -24,7 +24,7 @@
     color: rgb(119, 119, 119);
     margin-top: 20px;
 }
-button{
+.googleLoginBtn{
     width: 100px;
     height: 40px;
     background: rgb(129, 109, 244);;
@@ -38,7 +38,7 @@ button{
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 5px;
     transition: 0.3s;
 }
-button:hover{
+.googleLoginBtn:hover{
     transform: translateY(-10px);
 }
 
