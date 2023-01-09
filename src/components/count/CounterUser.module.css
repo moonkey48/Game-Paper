@@ -1,13 +1,13 @@
 .counterItem{
     list-style: none;
     width: 180px;
-    height: 150px;
+    height: 180px;
     padding: 10px;
     border-radius: 5px;
     margin: 20px;
     position: relative;
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 5px;
 }
 .counterItem:not(:last-child){
     margin-right: 10px;
@@ -15,7 +15,7 @@
 .countMemberName{
     border: none;
     background: none;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
 }
 .countMemberName:focus{
@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px 0 0px;
+    margin-top: 40px;
 }
 
 .countValue{
@@ -37,8 +37,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 10px;
 }
-.buttonBox button{
+.buttonBox .countBtn{
     width:50px;
     height: 50px;
     background: none;
@@ -47,15 +48,15 @@
     cursor: pointer;
     color: rgb(50, 50, 50);
 }
-.buttonBox .countBtn{
-    font-size: 30px;
-    color: rgb(50, 50, 50);
+.buttonBox .countBtn:not(:last-child){
+    margin-right: 20px;
 }
+
 
 .deleteBtn{
     position: absolute;
     right: 10px;
-    bottom: 10px;
+    top: 10px;
     background: none;
     border: none;
     color: lightgrey;
@@ -64,4 +65,16 @@
 }
 .deleteBtn:hover{
     color:red
+}
+
+@media screen and (max-width: 700px) {
+    .counterItem{
+        width: calc(100% - 60px);
+    }
+    .countMemberName{
+        font-size: 18px;
+    }
+    .deleteBtn{
+        font-size: 16px;
+    }
 }

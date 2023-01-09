@@ -23,6 +23,7 @@
     font-weight: 700;
     color: rgb(129, 109, 244);
     transition: 0.3s;
+    font-size: 16px;
 }
 .button:hover{
     background: rgb(129, 109, 244);
@@ -36,11 +37,19 @@
     text-align: center;
     border: none;
     background: none;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: bold;
     width: 200px;
     height: 40px;
 }
 .roomName:focus{
     outline: none;
+}
+@media screen and (max-width: 700px){
+    .roomName{
+        font-size: 20px;
+    }
+    .button{
+        font-size: 18px ;
+    }
 }

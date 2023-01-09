@@ -10,6 +10,7 @@
     color: white;
     cursor: pointer;
     transition: 0.3s;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
 }
 .roomItem:hover{
     transform: translateY(-5px);
@@ -20,11 +21,16 @@
     width: 300px;
     height: 60px;
     background: white;
+    margin-top: 10px;
     margin-right: 10px;
     padding: 10px;
     border-radius: 5px;
     color: rgb(129, 109, 244);
     cursor: pointer;
     transition: 0.3s;
+    
     box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+}
+.gameItem:hover{
+    transform: translateY(-5px);
 }

@@ -37,3 +37,13 @@
     background-color: rgb(111, 111, 111);
 }
 
+@media screen and (max-width: 700px){
+    .logo{
+        left: 10px;
+        transform: translateY(-50%);
+    }
+    .navBtn{
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
