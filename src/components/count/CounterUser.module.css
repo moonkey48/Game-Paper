@@ -29,6 +29,7 @@
     justify-content: center;
     margin: 20px 0 0px;
 }
+
 .countValue{
     font-size: 40px;
 }
@@ -44,6 +45,11 @@
     border: none;
     font-size: 40px;
     cursor: pointer;
+    color: rgb(50, 50, 50);
+}
+.buttonBox .countBtn{
+    font-size: 30px;
+    color: rgb(50, 50, 50);
 }
 
 .deleteBtn{

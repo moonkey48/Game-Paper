@@ -46,6 +46,7 @@ const CountPage = ({database, auth}:CountPageProps) => {
         }
     }
     const handleNavigate = ()=>{
+        console.log('handleNavigate')
         navigate('/main')
     }
     useEffect(()=>{
@@ -53,7 +54,7 @@ const CountPage = ({database, auth}:CountPageProps) => {
             getRoomInfo()
         }
     },[params])
-    
+
     useEffect(()=>{
         if(roomInfo){
             setPageState('success')
