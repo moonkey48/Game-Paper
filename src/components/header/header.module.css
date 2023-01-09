@@ -13,14 +13,14 @@
 .navBox{
     position: absolute;
     top: 50%;
-    right: 20px;
+    right: 10px;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
     flex-direction: row;
 }
 .navBtn:not(:last-child) {
-    margin-right: 10px;
+    margin-right: 5px;
 }
 .navBtn{
     background: white;
