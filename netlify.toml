@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[context.production.environment]
+REACT_APP_FIREBASE_API_KEY = "AIzaSyDLXRX90yDnXtJ7vWY7YlS4YskbR1lg5A0"
+REACT_APP_FIREBASE_AUTH_DOMAIN = "gamepaper-125f6.firebaseapp.com"
+REACT_APP_FIREBASE_DATABASE_URL = "https://gamepaper-125f6-default-rtdb.firebaseio.com"
+REACT_APP_FIREBASE_PROJECT_ID = "gamepaper-125f6"
+REACT_APP_FIREBASE_STORAGE_BUCKET = "gamepaper-125f6.appspot.com"
+REACT_APP_FIREBASE_APP_ID = "1:451130205760:web:40cc41f7d55a2af264a1a5"
+REACT_APP_FIREBASE_MEASUREMENT_ID = "G-W3M3GC4PE5"
