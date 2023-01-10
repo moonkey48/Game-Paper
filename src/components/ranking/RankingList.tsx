@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RankingItemT } from '../../types/rankingType';
 import RankingItem from './RankingItem';
+import s from './ranking.module.css';
 
 /**
  * {[userName:string]:value}를 받아서
@@ -22,10 +23,10 @@ const RankingList = ({rankingProps}:RankingListProps) => {
     },[rankingProps])
     
     return (
-        <ul>
+        <ul className={s.rankingList}>
             {
-                rankingList.map((item:RankingItemT)=>{
-                    return <RankingItem key={item.name} item={item} />
+                rankingList.map((item:RankingItemT,index)=>{
+                    return <RankingItem key={item.name} item={item} ranking={index} />
                 })
             }
         </ul>

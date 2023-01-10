@@ -1,0 +1,27 @@
+.rankingList{
+    padding: 6px 10px;
+    background-color: rgb(129, 109, 244);
+    color: white;
+    border-radius: 5px;
+}
+
+.rankingItem{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+}
+.rankingItem:not(:last-child){
+    border-bottom: 2px solid white;
+}
+.ranking{
+    width: 30px;
+    text-align: right;
+    margin-right: 50px;
+}
+.rankingName{
+    margin-right: 20px;
+    width: 150px;
+    word-wrap: break-word;
+}
