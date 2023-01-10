@@ -14,10 +14,11 @@ type CounterProps = {
     handleChangeName: (memberId: string, changedName: string) => void;
     handleDeleteUser: (memberId: string) => void;
     handleAddUser:()=>void;
+    handleReset:(memberId:string)=>void;
     changeRoomName:(newRoomName:string)=>void;
     deleteRoom:()=>void
 }
-const Counter = ({roomInfo,users, handlePlus, handleMinus, handleChangeName, handleDeleteUser,handleAddUser, changeRoomName, deleteRoom}:CounterProps) => {
+const Counter = ({roomInfo,users, handlePlus, handleMinus, handleChangeName, handleDeleteUser,handleAddUser, changeRoomName, deleteRoom, handleReset}:CounterProps) => {
     const [roomName, setRoomName] = useState<string>(roomInfo?.roomName || 'default')
     const onChangeRoomName = (e:ChangeEvent<HTMLInputElement>) => {
         changeRoomName(e.target.value)
@@ -44,6 +45,7 @@ const Counter = ({roomInfo,users, handlePlus, handleMinus, handleChangeName, han
                 handleMinus={handleMinus}
                 handleDeleteUser={handleDeleteUser}
                 handleChangeName={handleChangeName}
+                handleReset={handleReset}
                 />
             }) 
         }

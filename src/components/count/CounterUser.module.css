@@ -17,6 +17,7 @@
     background: none;
     font-size: 16px;
     font-weight: bold;
+    color: rgba(0, 0, 0, 0.7);
 }
 .countMemberName:focus{
     outline: none;
@@ -53,6 +54,19 @@
 }
 
 
+.resetBtn{
+    position: absolute;
+    right: 60px;
+    top: 10px;
+    background: none;
+    border: none;
+    color: lightgrey;
+    cursor: pointer;
+    transition: 0.3s color;
+}
+.resetBtn:hover{
+    color:red
+}
 .deleteBtn{
     position: absolute;
     right: 10px;
@@ -75,6 +89,9 @@
         font-size: 18px;
     }
     .deleteBtn{
+        font-size: 16px;
+    }
+    .resetBtn{
         font-size: 16px;
     }
 }

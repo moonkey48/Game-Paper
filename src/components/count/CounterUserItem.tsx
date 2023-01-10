@@ -9,8 +9,9 @@ type CounterUserItemProps = {
     handleMinus:(uid:string)=>void;
     handleDeleteUser:(uid:string)=>void;
     handleChangeName:(memberId:string, changedName:string ) => void;
+    handleReset:(memberId:string)=>void
 }
-const CounterUserItem = ({uid, user, handlePlus, handleMinus, handleDeleteUser, handleChangeName}:CounterUserItemProps) => {
+const CounterUserItem = ({uid, user, handlePlus, handleMinus, handleDeleteUser, handleChangeName, handleReset}:CounterUserItemProps) => {
     const [memberName, setMemberName] = useState<string>(user.name)
     const onChangeNameInput = (e:ChangeEvent<HTMLInputElement>) =>{
         setMemberName(e.target.value)
@@ -29,6 +30,7 @@ const CounterUserItem = ({uid, user, handlePlus, handleMinus, handleDeleteUser, 
                 }}>+</button>
                 <button className={s.countBtn} onClick={()=>handleMinus(uid)}>-</button>
             </div>
+            <button className={s.resetBtn} onClick={()=>handleReset(uid)}>reset</button>
             <button className={s.deleteBtn} onClick={()=>handleDeleteUser(uid)}>delete</button>
         </li>
     )

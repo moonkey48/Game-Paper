@@ -25,3 +25,7 @@
     width: 150px;
     word-wrap: break-word;
 }
+.rankingValue{
+    width: 50px;
+    text-align: right;
+}

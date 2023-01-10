@@ -34,7 +34,13 @@ const CountContainer = ({database, auth, roomInfo, changeRoomName, deleteRoom}:C
     }
     const onMinus = (memberId:string) => {
         const updated = {...users};
-        updated[memberId].payload = updated[memberId].payload - 1;
+        updated[memberId].payload = updated[memberId].payload - 1 < 0 ? 0 : updated[memberId].payload - 1;
+        setUsers(updated)
+        changeDatabaseUser(memberId, updated[memberId])
+    }
+    const onReset = (memberId:string) => {
+        const updated = {...users};
+        updated[memberId].payload = 0;
         setUsers(updated)
         changeDatabaseUser(memberId, updated[memberId])
     }
@@ -80,6 +86,7 @@ const CountContainer = ({database, auth, roomInfo, changeRoomName, deleteRoom}:C
                 handleAddUser={onAddUser}
                 changeRoomName={changeRoomName}
                 deleteRoom={deleteRoom}
+                handleReset={onReset}
             />  
     )
 }
