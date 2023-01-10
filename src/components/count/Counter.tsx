@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import { RoomInfoT } from '../../types/roomTypes';
 import { UserCountListT } from '../../types/userTypes';
 import ColListContainer from '../flex-container/ColListContainer';
+import RankingList from '../lanking/RankingList';
 import s from './Counter.module.css';
 import CounterUserItem from './CounterUserItem';
 
@@ -24,6 +25,7 @@ const Counter = ({roomInfo,users, handlePlus, handleMinus, handleChangeName, han
     }
     return (
         <div className={s.container}>
+        
         <ul className={s.counterList}>
         {
             Object.keys(users).map(key=>{
