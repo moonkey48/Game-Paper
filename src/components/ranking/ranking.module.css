@@ -1,3 +1,4 @@
+
 .rankingList{
     padding: 6px 10px;
     background-color: rgb(129, 109, 244);
@@ -9,7 +10,7 @@
     list-style: none;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 10px 0;
 }
 .rankingItem:not(:last-child){
@@ -28,4 +29,15 @@
 .rankingValue{
     width: 50px;
     text-align: right;
+}
+@media screen and (max-width: 700px) {
+    .rankingList{
+        width: calc(100% - 60px);
+    }
+    .rankingItem{
+        justify-content: space-between;
+    }
+    .ranking{
+        margin-right: 20px;
+    }
 }
