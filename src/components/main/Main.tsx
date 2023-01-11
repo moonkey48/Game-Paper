@@ -7,6 +7,7 @@ import { RoomGameType, RoomInfoT } from '../../types/roomTypes';
 import { UserCountListT, UserT } from '../../types/userTypes';
 import BoxMainGames from '../boxs/BoxMainGames';
 import BoxMainRooms from '../boxs/boxMainRooms';
+import LoadingBoxMainRooms from '../boxs/LoadingBoxMainRooms';
 import ColListContainer from '../flex-container/ColListContainer';
 import RowListContainer from '../flex-container/RowListContainer';
 import Modal from '../modal/Modal';
@@ -74,10 +75,10 @@ const Main = ({auth,database}:MainProps) => {
 
     return (
         <div className={s.mainContainer}>
-            {
-                roomsIn && 
-                <section className={s.mainSection}>
+            <section className={s.mainSection}>
                 <LargeTitle message='기존 방' align='center'/>
+            {
+                roomsIn ?
                 <ColListContainer>
                 {
                     Object.keys(roomsIn).map(roomId=>{
@@ -90,9 +91,12 @@ const Main = ({auth,database}:MainProps) => {
                     })
                 }
                 </ColListContainer>
-                </section>
+                : <ColListContainer>
+                    <LoadingBoxMainRooms/>
+                    <LoadingBoxMainRooms/>
+                </ColListContainer>
             }
-
+            </section>
             <LargeTitle message='새로운 방 만들기' align='center' />
             <ColListContainer>
                 <BoxMainGames handleClick={()=>setNewCountPage(true)} />
