@@ -17,6 +17,12 @@ export type MemberT<T> = {
     id:string,
     payload:T
 }
+export type UserTableItemT = {
+    [turn:number]: number;
+}
+export type UserTableListT = {
+    [key:string]: MemberT<UserTableItemT[]>
+}
 export type UserCountListT = {
     [key:string]: MemberT<number>
 }

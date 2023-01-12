@@ -72,6 +72,10 @@
 .gameItem:hover{
     transform: translateY(-5px);
 }
+.gameItem.locked{
+    background: white;
+    color: rgb(221, 221, 221);
+}
 .gameItem .gameDesc{
     margin-top: 10px;
 }

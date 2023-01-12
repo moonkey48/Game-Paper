@@ -99,7 +99,8 @@ const Main = ({auth,database}:MainProps) => {
             </section>
             <LargeTitle message='새로운 방 만들기' align='center' />
             <ColListContainer>
-                <BoxMainGames handleClick={()=>setNewCountPage(true)} />
+                <BoxMainGames  gameType='count' message='간단한 점수 Count를 도와드립니다.' handleClick={()=>setNewCountPage(true)} />
+                <BoxMainGames enabled={false} gameType='table' message='여러명의 라운드 게임 테이블을 제공합니다.' handleClick={()=>setNewCountPage(true)} />
             </ColListContainer>
 
 
