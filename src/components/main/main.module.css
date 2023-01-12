@@ -1,0 +1,9 @@
+.mainContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.mainSection{
+    max-width: 1000px;
+    margin-bottom: 50px;
+}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
-import CountContainer from '../components/count/CountContainer';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import Loading from '../components/loading/Loading';
@@ -9,12 +8,11 @@ import { AuthT } from '../types/authTypes';
 import { DatabaseT } from '../types/databaseTypes';
 import { RoomInfoT } from '../types/roomTypes';
 
-
-type CountPageProps ={
-    database:DatabaseT;
-    auth:AuthT
+type TablePageProps = {
+    database: DatabaseT;
+    auth:AuthT;
 }
-const CountPage = ({database, auth}:CountPageProps) => {
+const TablePage = ({auth, database} : TablePageProps) => {
     const params = useParams()
     const navigate = useNavigate()
     const [cookies, ,removeCookie] = useCookies(['uid']);
@@ -69,24 +67,23 @@ const CountPage = ({database, auth}:CountPageProps) => {
             }
         })
     },[auth])
-
     return (
         <>
         { pageState === 'loading' && <Loading/> }
         { pageState === 'error' && <h1>error  when get info</h1> }
         { pageState === 'success' && <>
         <Header auth={auth} handleNavigate={handleNavigate} handleNavigateTo='메인으로'/>
-        <CountContainer 
+        {/* <CountContainer 
         auth={auth} 
         database={database} 
         roomInfo={roomInfo}
         deleteRoom={deleteRoom}
         changeRoomName={changeRoomName}
-        />
+        /> */}
         <Footer/>
         </> }
         </>
     )
 }
 
-export default CountPage;
+export default TablePage;

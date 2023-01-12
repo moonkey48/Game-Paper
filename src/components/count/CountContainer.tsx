@@ -1,55 +1,93 @@
-import React, { useEffect, useState } from 'react';
-import { DatabaseT, UserListT, UserT } from '../../types/user';
-import Loading from '../loading/Loading';
+import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { AuthT } from '../../types/authTypes';
+import { DatabaseT } from '../../types/databaseTypes';
+import { RoomInfoT } from '../../types/roomTypes';
+import { MemberT, UserCountListT } from '../../types/userTypes';
 import Counter from './Counter';
 
 type CountContainerProps = {
-    database:DatabaseT
+    roomInfo:RoomInfoT | undefined;
+    database:DatabaseT;
+    auth:AuthT;
+    changeRoomName:(newRoomName:string)=>void;
+    deleteRoom:()=>void
 }
 
-const CountContainer = ({database}:CountContainerProps) => {
-    const [isLoading, setIsLoading] = useState<boolean>(true)
+const CountContainer = ({database, auth, roomInfo, changeRoomName, deleteRoom}:CountContainerProps) => {
+    const [cookies] = useCookies(['uid'])
     const [roomId, setRoomId] = useState<string>('')
-    const [users,setUsers] = useState<UserListT>({})
-    const getRoomData = async() => {
-        database.getRoomInfo("user1", "counter_room1", (data:any)=>{
-            console.log(data)
-            setRoomId(data.id)
-            setIsLoading(false)
-            setUsers(data.userList)
-        })
-    }
+    const [users,setUsers] = useState<UserCountListT>({})
+
     useEffect(()=>{
-        getRoomData()
+        if(roomInfo !== undefined){
+            setRoomId(roomInfo.roomId)
+            setUsers(roomInfo.users);
+        }
     },[])
 
-    const onPlus = (id: string) =>{
+    const onPlus = (memberId: string) =>{
         const updated = {...users};
-        updated[id].count = updated[id].count + 1;
+        updated[memberId].payload = updated[memberId].payload + 1;
         setUsers(updated)
-        changeDatabaseUser(id, updated[id])
+        changeDatabaseUser(memberId, updated[memberId])
     }
-    const onMinus = (id:string) => {
+    const onMinus = (memberId:string) => {
         const updated = {...users};
-        updated[id].count = updated[id].count - 1;
+        updated[memberId].payload = updated[memberId].payload - 1 < 0 ? 0 : updated[memberId].payload - 1;
         setUsers(updated)
-        changeDatabaseUser(id, updated[id])
+        changeDatabaseUser(memberId, updated[memberId])
     }
-    const changeDatabaseUser = (userId:string, user:UserT) => {
-        database.setUser("user1", roomId, userId, user)
+    const onReset = (memberId:string) => {
+        const updated = {...users};
+        updated[memberId].payload = 0;
+        setUsers(updated)
+        changeDatabaseUser(memberId, updated[memberId])
+    }
+    const onChangeName = (memberId:string, changedName:string) => {
+        const updated = {...users};
+        updated[memberId].name = changedName || 'default name';
+        setUsers(updated);
+        changeDatabaseUser(memberId, updated[memberId]);
+    }
+    const onDeleteUser = (memberId:string) => {
+        let updated: UserCountListT = {}
+        Object.keys(users).forEach(uid=>{
+            if(uid!==memberId){
+                updated[uid] = users[uid];
+            }
+        })
+        setUsers(updated)
+        changeDatabaseUser(memberId, null)
+    } 
+
+    const onAddUser = () => {
+        let updated = {...users}
+        const newUserId = `${Date.now()}_${Math.round(Math.random()*100)}`;
+        updated[newUserId] = {
+            name:'user_name_default',
+            id:newUserId,
+            payload:0
+        }
+        setUsers(updated);
+        changeDatabaseUser(newUserId,  updated[newUserId])
+    }
+    const changeDatabaseUser = (userId:string, user:MemberT<number> | null) => {
+        database.setUserCount(cookies.uid, roomId, userId, user)
     }
     return (
-        <>
-        {
-        isLoading ?
-        <Loading/> :
-        <Counter 
-            users={users} 
-            handlePlus={onPlus}
-            handleMinus={onMinus}
-        /> 
-        }
-        </>
+            <Counter 
+                roomInfo={roomInfo}
+                users={users} 
+                handlePlus={onPlus}
+                handleMinus={onMinus}
+                handleDeleteUser={onDeleteUser}
+                handleChangeName={onChangeName}
+                handleAddUser={onAddUser}
+                changeRoomName={changeRoomName}
+                deleteRoom={deleteRoom}
+                handleReset={onReset}
+            />  
     )
 }
 
