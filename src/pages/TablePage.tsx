@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import Loading from '../components/loading/Loading';
+import TableContainer from '../components/table/TableContainer';
 import { AuthT } from '../types/authTypes';
 import { DatabaseT } from '../types/databaseTypes';
 import { RoomInfoT } from '../types/roomTypes';
@@ -18,6 +19,7 @@ const TablePage = ({auth, database} : TablePageProps) => {
     const [cookies, ,removeCookie] = useCookies(['uid']);
     const [roomInfo, setRoomInfo] = useState<RoomInfoT>();
     const [pageState, setPageState] = useState<'loading' | 'error' | 'success'>('loading')
+    
 
     const getRoomInfo = () => {
         const roomId = params.roomId as string
@@ -73,13 +75,13 @@ const TablePage = ({auth, database} : TablePageProps) => {
         { pageState === 'error' && <h1>error  when get info</h1> }
         { pageState === 'success' && <>
         <Header auth={auth} handleNavigate={handleNavigate} handleNavigateTo='메인으로'/>
-        {/* <CountContainer 
-        auth={auth} 
-        database={database} 
+        <TableContainer
         roomInfo={roomInfo}
+        database={database}
+        auth={auth}
         deleteRoom={deleteRoom}
         changeRoomName={changeRoomName}
-        /> */}
+        />
         <Footer/>
         </> }
         </>
