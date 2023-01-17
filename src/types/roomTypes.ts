@@ -1,4 +1,4 @@
-export type RoomGameType = 'count';
+export type RoomGameType = 'count' | 'table';
 export type RoomInfoT = {
     roomGameType:RoomGameType;
     roomId:string;

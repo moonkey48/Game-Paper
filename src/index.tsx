@@ -10,6 +10,7 @@ import Auth from './service/auth';
 import { CookiesProvider } from 'react-cookie';
 import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
+import TablePage from './pages/TablePage';
 
 const database = new Database(app);
 const auth = new Auth(app);
@@ -26,6 +27,7 @@ root.render(
           <Route path='/login' element={<LoginPage auth={auth} database={database} />} />
           <Route path='/main' element={<MainPage auth={auth} database={database} />} />
           <Route path='/main/count/:roomId' element={<CountPage auth={auth} database={database} />} />
+          <Route path='/main/table/:roomId' element={<TablePage auth={auth} database={database} />} />
         </Routes>
       </BrowserRouter>
     </CookiesProvider>
