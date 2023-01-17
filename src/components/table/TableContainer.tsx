@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthT } from '../../types/authTypes';
 import { DatabaseT } from '../../types/databaseTypes';
 import { RoomInfoT } from '../../types/roomTypes';
@@ -11,25 +11,50 @@ type TableContainerProps = {
     changeRoomName:(newRoomName:string)=>void;
     deleteRoom:()=>void
 }
+type RoundT = {
+    value: number;
+    total: number
+}
+type UserTableT = {
+    name:string
+    total:number
+    rounds: RoundT[]
+}
 
 const TableContainer = ({database, auth, roomInfo, changeRoomName, deleteRoom}: TableContainerProps) => {
+    const [roundLength, setRoundLength] = useState<number>(1);
+    useEffect(()=>{
+        if(roomInfo){
+            setRoundLength(roomInfo.users[0].rounds.length)
+        }
+    },[])
+
     return (
         <div className={s.container}>
-            <table>
-                <th>round</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <tr>
-                    <td>user1</td>
-                    <td>20</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <td>user2</td>
-                    <td>10</td>
-                    <td>40</td>
-                </tr>
+            <table className={s.table}>
+                <thead>
+                    <tr>
+                        <th>round</th>
+                        <th>1</th>
+                        <th>2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                    roomInfo && roomInfo.users.map((user:UserTableT)=>{
+                        return <tr>
+                            <td>
+                                <input type="text" value={user.name} />
+                            </td>
+                            {user.rounds.map((round:RoundT)=>{
+                                return <td>
+                                    <input type="text" value={round.value} />
+                                </td>
+                            })}
+                        </tr>
+                    })   
+                    }
+                </tbody>
             </table>
 
         </div>
