@@ -13,6 +13,41 @@ type TablePageProps = {
     database: DatabaseT;
     auth:AuthT;
 }
+const test_roomInfo:RoomInfoT ={
+    roomGameType:'table',
+    roomId:'test',
+    roomName: 'test_room',
+    users:[
+        {
+            name:'austin', 
+            total:50, 
+            rounds:[
+                {
+                    value:30,
+                    total:30
+                },
+                {
+                    value:20,
+                    total:50
+                },
+            ]
+        },
+        {
+            name:'lizzy', 
+            total:20, 
+            rounds:[
+                {
+                    value:10,
+                    total:10
+                },
+                {
+                    value:10,
+                    total:20
+                },
+            ]
+        },
+    ]
+}
 const TablePage = ({auth, database} : TablePageProps) => {
     const params = useParams()
     const navigate = useNavigate()
@@ -53,6 +88,7 @@ const TablePage = ({auth, database} : TablePageProps) => {
         if(params){
             getRoomInfo()
         }
+        setRoomInfo(test_roomInfo)
     },[params])
 
     useEffect(()=>{
